@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.eventlistmvvm.roomdb.Event;
 import com.example.eventlistmvvm.roomdb.EventDao;
 import com.example.eventlistmvvm.roomdb.EventDb;
+import com.example.eventlistmvvm.EventRepository;
 
 import java.util.HashMap;
 
@@ -45,6 +46,7 @@ public class CreateEventActivity extends AppCompatActivity {
         EditText date = findViewById(R.id.event_date);
         
         // TODO: Create a repo object
+        EventRepository repository = EventRepository.getInstance(getApplicationContext());
 
         createBtn.setOnClickListener((view) -> {
             String titleStr = title.getText().toString();
@@ -56,6 +58,7 @@ public class CreateEventActivity extends AppCompatActivity {
             }
             
             // TODO: store the event in the repo
+            repository.insertEvent(new Event(titleStr, dateStr, images.get(typeKey)));
             title.setText("");
             date.setText("");
             Toast.makeText(this, "Event Created", Toast.LENGTH_LONG).show();
