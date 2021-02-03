@@ -1,17 +1,17 @@
 package com.example.roomdbexample;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
-import android.content.Intent;
-import android.database.Cursor;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import com.example.roomdbexample.roomdb.Event;
+import com.example.roomdbexample.roomdb.EventDao;
+import com.example.roomdbexample.roomdb.EventDb;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.lang.reflect.Array;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,5 +31,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        EventDb db = Room.databaseBuilder(getApplicationContext(), EventDb.class, EventDb.DATABASE_NAME).allowMainThreadQueries().build();
+        EventDao dao = db.eventDao();
+        ArrayAdapter<Event> adapter = new EventListAdapter(getApplicationContext(), dao.getAllEvent());
+        eventList.setAdapter(adapter);
     }
 }
