@@ -3,38 +3,47 @@ package com.example.unitcoverter;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     // Begin Midterm
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button fbtn = findViewById(R.id.convert_btn);
-        Button lbsbtn = findViewById(R.id.convert_btn2);
+        Button btn = findViewById(R.id.convert_btn);
+        EditText finput = findViewById(R.id.conversion_input);
+        TextView ctxt = findViewById(R.id.conversion_output_text);
+        Spinner spinner = findViewById(R.id.spinner);
+        spinner.setOnItemSelectedListener(this);
 
-        EditText finput = findViewById(R.id.fahrenheit_input);
-        TextView ctxt = findViewById(R.id.celcius_text);
-        EditText lbsinput = findViewById(R.id.pounds_input);
-        TextView kgtxt = findViewById(R.id.kilograms_text);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.conversion_types, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
 
-
-        fbtn.setOnClickListener(v -> {
+        btn.setOnClickListener(v -> {
             if (finput.getText().length() == 0)
                 return;
-            double celcius = Converter.toCelcius(Float.parseFloat(finput.getText().toString()));
-            ctxt.setText(String.format("%.2f ºC", celcius));
+            double conversion_input = Converter.toCelcius(Float.parseFloat(finput.getText().toString()));
+            ctxt.setText(String.format("%", conversion_input));
         });
+    }
 
-        lbsbtn.setOnClickListener(v -> {
-            if (lbsinput.getText().length() == 0)
-                return;
-            double kilograms = Converter.toKilograms(Float.parseFloat(lbsinput.getText().toString()));
-            kgtxt.setText(String.format("%.2f kg", kilograms));
-        });
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        return;
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        return;
     }
 }

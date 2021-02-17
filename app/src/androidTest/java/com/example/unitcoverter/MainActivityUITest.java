@@ -35,15 +35,15 @@ public class MainActivityUITest {
 
     @Test
     public void can_enter_fahrenheit() {
-        onView(withId(R.id.fahrenheit_input)).perform(typeText("45"));
+        onView(withId(R.id.conversion_input)).perform(typeText("45"));
         onView(withId(R.id.convert_btn)).perform(click());
-        onView(withId(R.id.celcius_text)).check(matches(withText("7.22 ºC")));
+        onView(withId(R.id.conversion_output_text)).check(matches(withText("7.22 ºC")));
     }
 
     @Test
     public void should_not_enter_empty_fah() {
         onView(withId(R.id.convert_btn)).perform(click());
-        onView(withId(R.id.celcius_text)).check(matches(withText("ºC")));
+        onView(withId(R.id.conversion_output_text)).check(matches(withText("ºC")));
     }
 
     @Test
