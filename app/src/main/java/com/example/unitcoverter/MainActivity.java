@@ -1,8 +1,8 @@
 package com.example.unitcoverter;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,14 +11,26 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+
+import com.example.unitcoverter.databinding.ActivityMainBinding;
+
+@RequiresApi(api = Build.VERSION_CODES.R)
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    // Begin Midterm
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // TODO: Remove the button
         Button btn = findViewById(R.id.convert_btn);
+
+        ConverterViewModel vm = new ConverterViewModel();
+
+
+
         EditText finput = findViewById(R.id.conversion_input);
         TextView ctxt = findViewById(R.id.conversion_output_text);
         Spinner spinner = findViewById(R.id.spinner);
@@ -29,16 +41,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-        btn.setOnClickListener(v -> {
-            if (finput.getText().length() == 0)
-                return;
-            double conversion_input = Converter.toCelcius(Float.parseFloat(finput.getText().toString()));
-            ctxt.setText(String.format("%", conversion_input));
-        });
+        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        binding.setLifecycleOwner(this);
+        binding.setViewmodel(vm);
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+        String selection = parent.getItemAtPosition(pos).toString();
+        Log.i("INFO", selection);
         return;
     }
 
