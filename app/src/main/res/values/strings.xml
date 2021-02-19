@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Unit Coverter</string>
+    <string-array name="conversions">
+        <item>Apples to Oranges</item>
+        <item>Feet to Meters</item>
+        <item>Fluid Ounces to Milliliters</item>
+        <item>Pounds to Kilograms</item>
+    </string-array>
 </resources>
