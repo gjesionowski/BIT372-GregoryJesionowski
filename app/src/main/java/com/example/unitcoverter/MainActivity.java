@@ -36,17 +36,17 @@ public class MainActivity extends AppCompatActivity {
         Converter converter = new Converter();
         ConverterViewModel model = new ViewModelProvider(this).get(ConverterViewModel.class);
         model.getCurrentConversion();
+        model.getConversionOutput();
         model.conversion.observe(this, conversion -> {
             TextView title = findViewById(R.id.conversion_title);
             title.setText(conversion);
-            Log.i("INFO", " Conversion Observer is working, changed title to " + conversion);
+            Log.i("INFO", "Conversion Observer is working, changed title to " + conversion);
         });
         model.conversionOutput.observe(this, conversionOutput -> {
             TextView coutput = findViewById(R.id.converter_output);
             coutput.setText(conversionOutput);
             Log.i("INFO", "Output Observer is working, changed output value to " + conversionOutput);
         });
-
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -64,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
                 return;
             float input = Float.parseFloat(finput.getText().toString());
             int pos = spinner.getSelectedItemPosition();
-            model.getConversionOutput();
             model.updateConversionOutput(converter.convertValues(pos, input));
             });
     }
