@@ -11,12 +11,22 @@ import static org.junit.Assert.*;
  */
 public class ConverterTest {
     @Test
-    public void fahrenheit_conversion_isCorrect() {
-        assertEquals(0.0, Converter.toCelcius(32),0.01);
+    public void apples_conversion_isCorrect() {
+        assertEquals(103.00, Converter.toOranges(100),0.01);
     }
 
     @Test
     public void pounds_conversion_isCorrect() {
         assertEquals(45.36, Converter.toKilograms(100),0.01);
+    }
+
+    @Test
+    public void ounces_conversion_isCorrect() {
+        assertEquals(2957.40, Converter.toMilliliters(100),0.01);
+    }
+
+    @Test
+    public void feet_conversion_isCorrect() {
+        assertEquals(328.10, Converter.toFeet(100),0.01);
     }
 }

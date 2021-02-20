@@ -11,6 +11,16 @@ import androidx.lifecycle.ViewModel;
 public class ConverterViewModel extends ViewModel {
     private ConverterRepository repo = new ConverterRepository();
 
+    public MutableLiveData<String> conversionOutput = new MutableLiveData<>();
+
+    public LiveData<String> getConversionOutput() {
+        return repo.getConversionOutput();
+    }
+
+    public void updateConversionOutput(String in) {
+        conversionOutput.setValue(repo.updateConversionOutput(in));
+    }
+
     public MutableLiveData<String> conversion = new MutableLiveData<>();
 
     public LiveData<String> getCurrentConversion() {

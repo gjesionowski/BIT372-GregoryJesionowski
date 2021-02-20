@@ -1,5 +1,7 @@
 package com.example.unitcoverter;
 
+import android.annotation.SuppressLint;
+
 public class Converter {
     public static float toFeet(float input) {
         return (float) (input * 3.281);
@@ -17,24 +19,21 @@ public class Converter {
         return (float) (input * 29.574);
     }
 
+    @SuppressLint("DefaultLocale")
     public String convertValues(int pos, float input) {
         switch (pos) {
             case 0:
                 double output = Converter.toOranges(input);
-                String str = String.format("%.2f Oranges", output);
-                return str;
+                return String.format("%.2f Oranges", output);
             case 1:
                 output = Converter.toFeet(input);
-                str = String.format("%.2f Feet", output);
-                return str;
+                return String.format("%.2f Feet", output);
             case 2:
                 output = Converter.toMilliliters(input);
-                str = String.format("%.2f ml", output);
-                return str;
+                return String.format("%.2f ml", output);
             case 3:
                 output = Converter.toKilograms(input);
-                str = String.format("%.2f Kg", output);
-                return str;
+                return String.format("%.2f Kg", output);
             default:
                 throw new IllegalStateException("Unexpected value: " + pos);
         }

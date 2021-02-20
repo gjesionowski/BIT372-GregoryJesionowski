@@ -34,28 +34,42 @@ public class MainActivityUITest {
     }
 
     @Test
-    public void can_enter_fahrenheit() {
-        onView(withId(R.id.fahrenheit_input)).perform(typeText("45"));
+    public void should_not_enter_empty_input() {
         onView(withId(R.id.convert_btn)).perform(click());
-        onView(withId(R.id.celcius_text)).check(matches(withText("7.22 ºC")));
+        onView(withId(R.id.converter_output)).check(matches(withText("")));
     }
 
     @Test
-    public void should_not_enter_empty_fah() {
+    public void can_enter_apples() {
+        onView(withId(R.id.converter_input)).perform(typeText("45"));
         onView(withId(R.id.convert_btn)).perform(click());
-        onView(withId(R.id.celcius_text)).check(matches(withText("ºC")));
+        onView(withId(R.id.converter_output)).check(matches(withText("48.00 Oranges")));
     }
 
     @Test
-    public void can_enter_lbs() {
-        onView(withId(R.id.pounds_input)).perform(typeText("45"));
-        onView(withId(R.id.convert_btn2)).perform(click());
-        onView(withId(R.id.kilograms_text)).check(matches(withText("20.41 kg")));
+    public void can_enter_pounds() {
+        onView(withId(R.id.spinner)).perform(click());
+        onView(withText("Pounds to Kilograms")).perform(click());
+        onView(withId(R.id.converter_input)).perform(typeText("100"));
+        onView(withId(R.id.convert_btn)).perform(click());
+        onView(withId(R.id.converter_output)).check(matches(withText("45.36 Kg")));
     }
 
     @Test
-    public void should_not_enter_empty_lbs() {
-        onView(withId(R.id.convert_btn2)).perform(click());
-        onView(withId(R.id.kilograms_text)).check(matches(withText("kg")));
+    public void can_enter_ounces() {
+        onView(withId(R.id.spinner)).perform(click());
+        onView(withText("Fluid Ounces to Milliliters")).perform(click());
+        onView(withId(R.id.converter_input)).perform(typeText("100"));
+        onView(withId(R.id.convert_btn)).perform(click());
+        onView(withId(R.id.converter_output)).check(matches(withText("2957.40 ml")));
+    }
+
+    @Test
+    public void can_enter_meters() {
+        onView(withId(R.id.spinner)).perform(click());
+        onView(withText("Meters to Feet")).perform(click());
+        onView(withId(R.id.converter_input)).perform(typeText("100"));
+        onView(withId(R.id.convert_btn)).perform(click());
+        onView(withId(R.id.converter_output)).check(matches(withText("328.10 Feet")));
     }
 }
